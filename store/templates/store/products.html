@@ -1,0 +1,106 @@
+{% extends 'store/base.html' %} {% load static %} {% load humanize %} 
+
+{% block content %}
+<main class="main">
+    <div class="filtr--cont">
+        <h4 class="button filtr__theme">Filter</h4>
+    </div>
+    <div class="filtr">
+        <form action="." method="get">
+            <div class="inputBox">
+                <input type="text" name="search" id="id_search" style="width: 100%;" />
+                <span>Qidirish</span>
+            </div>
+            <div class="filtr--type">
+                <h4>Bo'lim:</h4>
+                <select name="category" id="id_category" class="types--button">
+
+                    <div class="filtr--type__all">
+                        <p class="type">
+                            <span></span>
+                            <option value="">Tanlash uchun bosing</option>
+                        </p>
+                            {% for category in categories %}
+                            <p class="type">
+                                <span></span>
+                                <option value="{{ category.id }}">{{category.title}}</option>
+                            </p>
+                            {% endfor %}
+                    </div>
+                </select>
+            </div>
+
+            <div class="filtr--type">
+                <h4>Mavjudligi:</h4>
+                <select name="available" id="id_available">
+                    <div class="filtr--type__all">
+                        <p class="type checked">
+                            <span></span>
+                            <option value="true" selected>Bor</option>
+                        </p>
+                        <p class="type">
+                            <span></span>
+                            <option value="false">Yoq</option>
+                        </p>
+                    </div>
+                </select>
+            </div>
+            <div class="filts-se">
+                <div class="filtr-save">
+                    <i class="bx bx-check"></i>
+                    <button type="submit" style="background: none; color:white;">Saralash</button>
+                </div>
+                <div class="filtr-exit">
+                    <i class="bx bx-x"></i>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--==================== TRICK OR TREAT ====================-->
+    <section class="section trick" id="trick">
+        <div class="trick__container container products-html grid">
+            {% for product in products %}
+            <div class="trick__content">
+                <img src="{{product.imageURL}}" alt="" class="trick__img" />
+                <h3 class="trick__title">{{product.name}}</h3>
+                <span class="trick__subtitle">{{product.category}}</span>
+                <span class="trick__price">{{product.price|intcomma}} so'm</span>
+                <button data-product="{{product.id}}" data-action="add"
+                    class="update-cart add-btn button trick__button">
+                    <i class="bx bx-cart-alt trick__icon"></i>
+                </button>
+                <a href="{% url 'product_detail' product.id %}" class="button trick__button-read">
+                    <i class='bx bx-library'></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="container others-prod">
+            {% if products.has_next %}
+                <h4 class="button"><a style="color: white;" href="?page={{products.next_page_number}}">Boshqa mahsulotlar</a></h4>
+            {% endif %}
+        </div>
+    </section>
+    <!--==================== ABOUT ====================-->
+    <section class="section about" id="about">
+        <div class="about__container container grid">
+            <div class="about__data">
+                <h2 class="section__title about__title">
+                    About Halloween <br />
+                    Night
+                </h2>
+                <p class="about__description">
+                    Night of all the saints, or all the dead, is celebrated on October 31
+                    and it is a very fun international celebration, this celebration comes
+                    from ancient origins, and is already celebrated by everyone.
+                </p>
+                <a href="#" class="button">Telegram</a>
+            </div>
+
+            <img src="{% static 'assets/img/about-img.png' %}" alt="" class="about__img" />
+        </div>
+    </section>
+</main>
+{% endblock content %}

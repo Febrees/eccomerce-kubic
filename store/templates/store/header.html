@@ -1,0 +1,39 @@
+{% load static %}
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="{% url 'store' %}" class="nav__logo">
+      <img src="{% static 'assets/img/logo.png' %}" alt="" class="nav__logo-img" />
+    </a>
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href="{% url 'product_list' %}" class="nav__link">Mahsulotlar</a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#new" class="nav__link">Yig'ishni o'rganish</a>
+        </li>
+        <!-- kubik savatga qoshilganda qizil dumaloq yoqilishi kerak, agar savatga hech nima qoshilmagan bolsal, ko'rinmasligi kerak -->
+        <li class="nav__item">
+          <a href="{% url 'cart' %}" class="nav__link">Buyurtma berish
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{cartItems}}
+            </span>
+          </a>
+        </li>
+
+        <a href="{% url 'store' %}#contact" class="button button--ghost">Aloqa</a>
+      </ul>
+
+      <div class="nav__close" id="nav-close">
+        <i class="bx bx-x"></i>
+      </div>
+
+      <img src="{% static 'assets/img/nav-img.png' %}" alt="" class="nav__img" />
+    </div>
+
+    <div class="nav__toggle" id="nav-toggle">
+      <i class="bx bx-grid-alt"></i>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,176 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load humanize %}
+
+        {% block content %} 
+        <!-- About products -->
+        <div class="about_pro">
+            {% for pr in products %}
+            <div class="about_products" id="{{pr.id}}">
+                <h3 class="section__title">{{pr.name}}</h3>
+                <div class="about_products--content">
+                    <p>{{pr.about}}</p>
+                    <img src="{{pr.imageURL}}" alt="">
+                </div>
+                <i class='bx bxs-x-square exit'></i>
+            </div>
+            {% endfor %}
+        </div>
+        <main class="main">
+            <!--==================== HOME ====================-->
+            <section class="home container" id="home">
+                <div class="swiper home-swiper">
+                    <div class="swiper-wrapper">
+                        <!-- HOME SLIDER 1 -->
+                        <section class="swiper-slide">
+                            <div class="home__content grid">
+                                <div class="home__group">
+                                    <img src="{% static 'assets/img/rubik.png' %}" alt="" class="home__img">                                     
+                                   
+                                </div>
+                                <div class="home__data">
+                                    <h3 class="home__subtitle">Dunyodagi #1 – raqamli boshqotirma!</h3>
+                                    <h1 class="home__title">Kubik rubik</h1>
+                                    <p class="home__description">Salom, biz eng sifatli kubiklarni sizga yetkazib berish va ularni qanday yig‘ishni o‘rgatish orqali xotirangiz, fikirlashingiz rivojlanishiga va vaqtingiz maroqli o‘tishini taminlaymiz.
+                                    </p>
+
+                                    <div class="home__buttons">
+                                        <a href="https://t.me/allboxuz"><i class='bx bxl-telegram'></i></a>
+                                        <a href="http://www.instagram.com/allbox.uz"><i class='bx bxl-instagram' ></i></a>
+                                        
+                                        <a href="tel:+998977123456" class="button--link button--flex"><i class='bx bx-phone' ></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </section>
+                        <section class="swiper-slide">
+                            <div class="home__content grid">
+                                <div class="home__group">
+                                    <img src="{% static 'assets/img/rubik.png' %}" alt="" class="home__img">                                     
+                                   
+                                </div>
+                                <div class="home__data">
+                                    <h3 class="home__subtitle">Eng ommabob hobbi</h3>
+                                    <h1 class="home__title">Kubik rubik</h1>
+                                    <p class="home__description">Dunyoda 400 mln dan ortiq kubik rubiklar sotilgan.
+                                        Kubik rubik mavjud kombinatsiyalari soni 43 252 003 274 489 856 000 tani tashkil etadi
+                                        .
+                                    </p>
+
+                                    <div class="home__buttons">
+                                        <a href="https://t.me/allboxuz"><i class='bx bxl-telegram'></i></a>
+                                        <a href="http://www.instagram.com/allbox.uz"><i class='bx bxl-instagram' ></i></a>
+                                        
+                                        <a href="tel:+998977123456" class="button--link button--flex"><i class='bx bx-phone' ></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </section>
+                       
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section>            
+          
+
+           
+
+            <!--==================== TRICK OR TREAT ====================-->
+            <section class="section trick" id="trick">
+                <h2 class="section__title">Mahsulotlar</h2>
+
+                <div class="trick__container container grid">
+                    {% for product in products %}
+                        <div class="trick__content">
+                            <img src="{{product.imageURL}}" alt="" class="trick__img">
+                            <h3 class="trick__title">{{product.name}}</h3>
+                            <span class="trick__subtitle">{{ product.category }}</span>
+                            <span class="trick__price">{{ product.price|intcomma }} so'm</span>
+                            <!-- mashu knopkani bosganda savatga qoshilishi kerak -->
+                            <button data-product="{{product.id}}" data-action="add" class="update-cart add-btn button trick__button">
+                                <i class='bx bx-cart-alt trick__icon'></i>
+                            </button>
+                            <a href="{% url 'product_detail' product.id %}" class="button trick__button-read">
+                                <i class='bx bx-library'></i>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+                <a href="{% url 'product_list' %}" class="trick-button">
+                    <div class="button">Barcha Mahsulotlar</div>
+
+                </a>
+
+            </section>
+            
+            <!--==================== NEW ARRIVALS ====================-->
+            <section class="section new" id="new">
+                <h2 class="section__title">So'ngi Mahsulotlar</h2>
+
+                <div class="new__container container">
+                    <div class="swiper new-swiper">
+                        <div class="swiper-wrapper">
+                            {% for pr in new_products %}
+                            <div class="new__content swiper-slide">
+                                <div class="new__tag">{{pr.price|intcomma}} so'm</div>
+                                <a ref="{% url 'product_detail' pr.id %}">
+                                    <img src="{{ pr.imageURL }}" alt="" class="new__img">
+                                    <h3 class="new__title">{{ pr.name }}</h3>
+                                </a>
+                                <span class="new__subtitle">{{ pr.category }}</span>        
+
+                                <a href="{% url 'product_detail' pr.id %}" class="button new__button">
+                                    <i class='bx bx-book-reader'></i>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--==================== ABOUT ====================-->
+            <section class="section about" id="about">
+                <div class="about__container container grid">
+                    <div class="about__data">
+                        <h2 class="section__title about__title">Buyurtma berish</h2>
+                        <p class="about__description">Mahsulotlarga buyurtma berish telegram ijtimoiy tarmog‘i orqali amalga oshiriladi va bunda mutahasislarimiz sizga o‘z maslahatlarini berib borishadi.
+                        </p>
+                        <a href="#" class="button">Telegram</a>
+                    </div>
+
+                    <img src="{% static 'assets/img/about-img.png' %}" alt="" class="about__img">
+                </div>
+            </section>
+            <!--==================== OUR NEWSLETTER ====================-->
+            <section class="section newsletter" id="contact">
+                <h2 class="section__title">Biz bilan aloqa</h2>
+                <form action="{% url 'contact' %}" method="post">{% csrf_token %}
+                    <div class="newsletter__container container form">
+                        <div class="inputBox">
+                            <input type="text" name="name" id="id_name" required='required'>
+                            <span>Ism</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" name="surname" id="id_surname" required='required'>
+                            <span>Familiya</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="email" name="email" id="id_email" required='required'>
+                            <span>Email manzil</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="tel" name="phone_number" id="id_phone_number" required='required'>
+                            <span>Telefon raqam</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" name="message" id="id_message" required='required'>
+                            <span>Xabar</span>
+                        </div>
+                        <button type="submit" class="button">Yuborish</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    {% endblock content %}

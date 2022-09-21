@@ -1,0 +1,37 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+        <main class="main">
+            <div class="article container">
+                <img src="{{ product.imageURL }}" alt="">
+                <h3>{{ product.name }}<span class="position-absolute top-0 start-100 translate-middle badge bg-secondary" style="font-size: 18px;">
+                    {{product.price|intcomma}} so'm</span></h3>
+                <p>{{product.about}}</p>
+            </div>
+            
+
+            <!--==================== TRICK OR TREAT ====================-->
+            <section class="section trick " id="trick">
+
+                <div class="trick__container container products-html grid ">
+                    {% for pr in same_products %}
+                    <div class="trick__content">
+                        <img src="{{pr.imageURL}}" alt="" class="trick__img">
+                        <h3 class="trick__title">{{pr.name}}</h3>
+                        <span class="trick__subtitle">{{pr.category}}</span>
+                        <span class="trick__price">{{pr.price|intcomma}} so'm</span>
+                        <button data-product="{{product.id}}" data-action="add" class="update-cart add-btn button trick__button">
+                            <i class='bx bx-cart-alt trick__icon'></i>
+                        </button>
+                        <a href="{% url 'product_detail' pr.id %}" class="button trick__button-read">
+                            <i class='bx bx-library'></i>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    <a href="{% url 'product_list' %}?search=&category={{product.category.id}}&available=true" class="trick-button">
+                        <div class="button">Barcha Mahsulotlar</div>
+    
+                    </a>
+            </section>
+{% endblock content %}

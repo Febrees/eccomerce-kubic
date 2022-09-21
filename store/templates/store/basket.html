@@ -1,0 +1,40 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load humanize %}
+
+        {% block content %} 
+        <!-- mana shutga yig'ish haqida ma'lumit, In this area you can write block about how to -->
+        <div class="basket container">
+            <div class="basket__amount">
+                <h3>Umumiy narx</h3>
+                <p>{{order.get_cart_total|intcomma}} so'm</p>
+            </div>
+            <div class="basket__list">
+            {% for item in items %}
+                <div class="basket__list-prod">
+                    <div class="basket-prodc--img">
+                        <img src="{{item.product.imageURL}}" alt="">
+                    </div>
+                    <div class="basket-produc--other">
+                        <div style="margin-right:20px ;">
+                            <span>Soni - {{item.quantity}}</span>
+                            <button data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart" style="background: none; color: white;">
+                                <i class='bx bx-plus-circle'></i>
+                            </button>
+                            <button data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart" style="background: none; color: white;">
+                                <i class='bx bx-minus-circle'></i>
+                            </button>
+                        </div>
+                        <div class="basket--other__cost">
+                            <h3>Narxi</h3>
+                            <p>{{ item.get_total|intcomma }} so'm</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+            <div class="basket__redirect">
+                <button class="button" type="submit">Buyurtma Qilish</button>
+            </div>
+        </div>
+{% endblock content %}
